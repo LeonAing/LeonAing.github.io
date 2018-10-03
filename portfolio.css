@@ -1,7 +1,8 @@
 body {
     background: rgb(165,172,175);
     background-image: url(http://safebooru.org/images/1242/d8cdcea301f79be6c74bc1dcc8573d156c1eb6cb.png);
-    background-size: cover;
+    background-size: 115%;
+    background-repeat: no-repeat;
     color: rgb(45, 45, 45);
     padding: 10px;
     font-family: arial;
@@ -57,7 +58,7 @@ nav a {
 /* main container area beneath menu */
 
 main {
-    background: #03b9c9;
+    background-image: linear-gradient(#03b9c9, white);
     display: flex;
     border-radius:30px 15px 15px 30px;
     border-color: #65696b;
