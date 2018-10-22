@@ -87,4 +87,6 @@ main {
     }
 .interests ul{
     font-family: 'Ubuntu', sans-serif;
+    line-height: 100px;
+    font-size: 24px;
     }
