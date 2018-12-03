@@ -18,7 +18,8 @@ var level01 = function (window) {
             gameItems: [
                 {type: 'sawblade',x:400,y:groundY},
                 {type: 'sawblade',x:600,y:groundY},
-                {type: 'sawblade',x:900,y:groundY}
+                {type: 'sawblade',x:900,y:groundY},
+                {type: 'box',x:100,y:200},
             ]
         };
         window.levelData = levelData;
@@ -35,19 +36,35 @@ var level01 = function (window) {
     myObstacle.x = x;
     myObstacle.y = y;
     game.addGameItem(myObstacle);
-    
     var obstacleImage = draw.bitmap('img/sawblade.png');
     myObstacle.addChild(obstacleImage);
     obstacleImage.x = -25;
-    obstacleImage.y = -25
-    
-}
-    for(var i = 0; i <= levelData.gameItems.length; i++){
-    createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
-}
+    obstacleImage.y = -25;
     }
-
+    
+    function createBox(x,y) {
+    // ????
+    var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+    myObstacle.x = x;
+    myObstacle.y = y;
+    game.addGameItem(myObstacle);
+    var obstacleImage = draw.bitmap('img/moon.png');
+    myObstacle.addChild(obstacleImage);
+    obstacleImage.x = -25;
+    obstacleImage.y = -25;
+    }
+    createBox(100,200);
+    
+    for(var i = 0; i <= levelData.gameItems.length; i++){
+    if(levelData.gameItems[i].type === 'sawblade') {createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
+    }
+    else if(levelData.gameItems[i].type === 'box') {createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
+    }
+    }
+    
+    };
 };
+
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&
