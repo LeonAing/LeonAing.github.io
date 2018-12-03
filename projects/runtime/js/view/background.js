@@ -57,7 +57,7 @@ var background = function (window) {
             // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             var buildingHeight = 300;
             var building;
-            for(var i = 0; i < 5 ; ++i) {
+            for(var i = 0; i < 8 ; ++i) {
                 building = draw.rect(75,buildingHeight,'LightGray','Black',1);
                 building.x = 200*i;
                 building.y = groundY-buildingHeight;
@@ -88,10 +88,12 @@ var background = function (window) {
             }
             
             // TODO 5: Part 2 - Parallax
-            buildings.x = buildings.x - 1;
+            for (var i = 0; i < buildings.length; i++) {
+            buildings[i].x = buildings[i].x - .3;
             
-            if(buildings.x < -200) {
-            buildings.x = canvasWidth;
+            if(buildings[i].x < -200) {
+            buildings[i].x = canvasWidth;
+            }
             }
         }
 
