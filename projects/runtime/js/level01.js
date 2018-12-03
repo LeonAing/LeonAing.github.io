@@ -42,9 +42,9 @@ var level01 = function (window) {
     obstacleImage.y = -25
     
 }
-    createSawBlade(400, 350);
-    createSawBlade(600, 300);
-    createSawBlade(800, 250);
+    for(var i = 0; i <= levelData.gameItems.length; i++){
+    createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
+}
     }
 
 };
