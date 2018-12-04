@@ -53,7 +53,8 @@ var level01 = function (window) {
     obstacleImage.x = -25;
     obstacleImage.y = -25;
     }
-    function createEnemy() {
+    
+    function createEnemy(x,y) {
     // all code from TODO 12
     var enemy =  game.createGameItem('enemy', 25);
     var redSquare = draw.rect(50,50,'red');
@@ -77,12 +78,30 @@ var level01 = function (window) {
     game.increaseScore(100);
     enemy.shrink();
 };
-    var createEnemy = function(x,y) {
+}
+    function createGameItem(x,y) {
+    var enemy =  game.createGameItem('enemy', 25);
+    var yellowCircle = draw.circle(25,'yellow');
+    yellowCircle.x = -25;
+    yellowCircle.y = -25;
+    enemy.addChild(yellowCircle);
+    enemy.x = x;
+    enemy.y = y;
+    game.addGameItem(enemy);
+    
+    enemy.velocityX = -1;
+    //enemy.rotationalVelocity = 10;
+    
+    enemy.onPlayerCollision = function() {
+    console.log('Halle has collected a reward');
+    game.increaseScore(500);
+    enemy.fadeOut();
 };
 }
-createEnemy(400,groundY-10);
-createEnemy(800,groundY-100);
-createEnemy(1200,groundY-50);
+    createGameItem(300, groundY-150)
+    createEnemy(500,groundY-50);
+    createEnemy(600,groundY-50);
+    createEnemy(700,groundY-50);
 
     for(var i = 0; i <= levelData.gameItems.length; i++){
     if(levelData.gameItems[i].type === 'sawblade') {createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
