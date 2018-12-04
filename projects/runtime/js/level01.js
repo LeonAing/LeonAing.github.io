@@ -24,7 +24,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(false);
+        game.setDebugMode(true);
 
         // BEGIN EDITING YOUR CODE HERE
     var hitZoneSize = 25;
@@ -48,13 +48,42 @@ var level01 = function (window) {
     myObstacle.x = x;
     myObstacle.y = y;
     game.addGameItem(myObstacle);
-    var obstacleImage = draw.bitmap('img/moon.png');
+    var obstacleImage = draw.bitmap('img/sawblade.png');
     myObstacle.addChild(obstacleImage);
     obstacleImage.x = -25;
     obstacleImage.y = -25;
     }
-    createBox(100,200);
+    function createEnemy() {
+    // all code from TODO 12
+    var enemy =  game.createGameItem('enemy', 25);
+    var redSquare = draw.rect(50,50,'red');
+    redSquare.x = -25;
+    redSquare.y = -25;
+    enemy.addChild(redSquare);
+    enemy.x = x;
+    enemy.y = y;
+    game.addGameItem(enemy);
     
+    enemy.velocityX = -1;
+    enemy.rotationalVelocity = 10;
+    
+    enemy.onPlayerCollision = function() {
+    console.log('The enemy has hit Halle');
+    game.changeIntegrity(-10);
+    enemy.fadeOut();
+};
+    enemy.onProjectileCollision = function() {
+    console.log('Halle has hit the enemy');
+    game.increaseScore(100);
+    enemy.shrink();
+};
+    var createEnemy = function(x,y) {
+};
+}
+createEnemy(400,groundY-10);
+createEnemy(800,groundY-100);
+createEnemy(1200,groundY-50);
+
     for(var i = 0; i <= levelData.gameItems.length; i++){
     if(levelData.gameItems[i].type === 'sawblade') {createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
     }
@@ -62,6 +91,7 @@ var level01 = function (window) {
     }
     }
     
+
     };
 };
 
