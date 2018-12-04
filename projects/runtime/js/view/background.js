@@ -55,10 +55,10 @@ var background = function (window) {
                 background.addChild(moon);
             
             // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            var buildingHeight = 300;
+            var buildingHeight = 500;
             var building;
             for(var i = 0; i < 8 ; ++i) {
-                building = draw.rect(75,buildingHeight,'LightGray','Black',1);
+                building = draw.rect(75,buildingHeight,'LightGray','Gray',1);
                 building.x = 200*i;
                 building.y = groundY-buildingHeight;
                 background.addChild(building);
@@ -81,7 +81,7 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x - 1;
+            tree.x = tree.x - 1.3;
             
             if(tree.x < -200) {
             tree.x = canvasWidth;

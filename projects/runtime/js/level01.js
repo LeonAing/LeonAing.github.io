@@ -16,14 +16,15 @@ var level01 = function (window) {
             number: 1, 
             speed: -3,
             gameItems: [
-                {type: 'sawblade',x:400,y:groundY},
-                {type: 'sawblade',x:600,y:groundY},
+                {type: 'sawblade',x:400,y:groundY-100},
+                {type: 'sawblade',x:600,y:groundY-100},
                 {type: 'sawblade',x:900,y:groundY},
-                {type: 'box',x:100,y:200},
+                {type: 'spike',x:300,y:groundY},
+                {type: 'fire',x:1000,y:groundY},
                 {type: 'enemy',x:500,y:groundY-50},
                 {type: 'enemy',x:600,y:groundY-50},
                 {type: 'enemy',x:700,y:groundY-50},
-                {type: 'reward',x:300,y:groundY-150},
+                {type: 'reward',x:900,y:groundY-150},
             ]
         };
         window.levelData = levelData;
@@ -46,13 +47,22 @@ var level01 = function (window) {
         obstacleImage.y = -25;
 }
     
-    function createBox(x,y) {
-        // ????
+    function createSpike(x,y) {
         var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
         myObstacle.x = x;
         myObstacle.y = y;
         game.addGameItem(myObstacle);
-        var obstacleImage = draw.bitmap('img/sawblade.png');
+        var obstacleImage = draw.bitmap('img/wooden-barricade.png');
+        myObstacle.addChild(obstacleImage);
+        obstacleImage.x = -25;
+        obstacleImage.y = -25;
+}
+    function createFire(x,y) {
+        var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+        myObstacle.x = x;
+        myObstacle.y = y;
+        game.addGameItem(myObstacle);
+        var obstacleImage = draw.bitmap('img/fire.png');
         myObstacle.addChild(obstacleImage);
         obstacleImage.x = -25;
         obstacleImage.y = -25;
@@ -83,7 +93,7 @@ var level01 = function (window) {
         enemy.shrink();
         };
 }
-    function createGameItem(x,y) {
+    function createReward(x,y) {
         var reward =  game.createGameItem('reward', 25);
         var yellowCircle = draw.circle(25,'yellow');
         yellowCircle.x = -25;
@@ -107,11 +117,13 @@ var level01 = function (window) {
     for(var i = 0; i <= levelData.gameItems.length; i++){
         if(levelData.gameItems[i].type === 'sawblade') {createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
         }
-        else if(levelData.gameItems[i].type === 'box') {createSawBlade(levelData.gameItems[i].x, levelData.gameItems[i].y);
+        else if(levelData.gameItems[i].type === 'spike') {createSpike(levelData.gameItems[i].x, levelData.gameItems[i].y);
+        }
+        else if(levelData.gameItems[i].type === 'fire') {createFire(levelData.gameItems[i].x, levelData.gameItems[i].y);
         }
         else if(levelData.gameItems[i].type === 'enemy') {createEnemy(levelData.gameItems[i].x, levelData.gameItems[i].y);
         }
-        else if(levelData.gameItems[i].type === 'reward') {createGameItem(levelData.gameItems[i].x, levelData.gameItems[i].y);
+        else if(levelData.gameItems[i].type === 'reward') {createReward(levelData.gameItems[i].x, levelData.gameItems[i].y);
         }
 }
 };
