@@ -23,19 +23,21 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
-
-    var rangedArr = [];
-    rangedArr.push(end);
     
-    if (start < end){
-        for(var i = start; i < end; i++){
-        rangedArr.push(i);
-    } return rangedArr;
+    var rangedArr = [];
+    rangedArr.push(start);
+    
+    if (start < end) {
+        while (start < end) {
+            start++;
+            rangedArr.push(start);
+        }   return rangedArr;     
     } else {
-        for(var i = end; i < start; i--){
-        rangedArr.push(i);
-    } return rangedArr;
-
+        while (start > end) {
+            start--;
+            rangedArr.push(start);
+        }
+    }   return rangedArr;
 
     // YOUR CODE GOES ABOVE HERE //
 }
