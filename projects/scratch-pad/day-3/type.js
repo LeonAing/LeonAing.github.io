@@ -15,8 +15,7 @@
 function isArray(value) {
     // YOUR CODE BELOW HERE //
     
-    
-    
+    return Array.isArray(value);
     
     // YOUR CODE ABOVE HERE //
 }
@@ -32,9 +31,17 @@ function isArray(value) {
 function isObject(value) {
     // YOUR CODE BELOW HERE //
     
-    
-    
-    
+    if (Array.isArray(value)) {
+        return false;
+    } else if (value === null) {
+        return false;
+    } else if (value instanceof Date) {
+        return false;
+    } else if (typeof value === 'object') {
+        return true;
+    } else {
+        return false;
+    }
     // YOUR CODE ABOVE HERE //
 }
 
@@ -47,8 +54,15 @@ function isObject(value) {
 function isCollection(value) {
     // YOUR CODE BELOW HERE //
     
-    
-    
+    if (value === null) {
+       return false;
+   } else if (value instanceof Date) {
+       return false;
+   } else if (typeof(value) === "object" || Array.isArray(value)) {
+       return true;
+   } else {
+       return false;
+   }
     
     // YOUR CODE ABOVE HERE //
 }
@@ -75,8 +89,45 @@ function isCollection(value) {
 function typeOf(value) {
     // YOUR CODE BELOW HERE //
     
-    
-    
+    if (value === null) {
+       return "null";
+   } else if (value instanceof Date === true) {
+       return "date";
+   } else if (Array.isArray(value) === true) {
+       return "array";
+   } else if (typeof(value) === "object") {
+       return "object";
+   } else if (typeof(value) === "string") {
+       return "string";
+   } else if (typeof(value) === "number") {
+       return "number";
+   } else if (typeof(value) === "boolean") {
+       return "boolean";
+   } else if (typeof(value) === "function") {
+       return "function";
+   } else if (typeof(value) === "undefined") {
+       return "undefined";
+   }
+   
+   /*if (typeof(value) === "string") {
+       return "string";
+   } else if (Array.isArray(value) === true) {
+       return "array";
+   } else if (typeof(value) === "object") {
+       return "object";
+   } else if (typeof(value) === "undefined") {
+       return "undefined";
+   } else if (typeof(value) === "number") {
+       return "number";
+   } else if (typeof(value) === "boolean") {
+       return "boolean";
+   } else if (value === null) {
+       return "null";
+   } else if (typeof(value) === "function") {
+       return "function";
+   } else if (value instanceof Date === true) {
+       return "date";
+   }*/
     
     // YOUR CODE ABOVE HERE //
 }
