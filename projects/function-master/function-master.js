@@ -27,7 +27,11 @@ function keysToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function valuesToString(object) {
-    
+    var str = '';
+    for (var x in object) {
+        if (typeof(object[x]) === 'string') str += object[x] + ' ';
+    }
+    return str.substring(0, str.length - 1);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -35,7 +39,12 @@ function valuesToString(object) {
 //////////////////////////////////////////////////////////////////////
 
 function arrayOrObject(collection) {
-    
+    if (Array.isArray(collection) === true) { 
+        return 'array';
+    }
+    if (Array.isArray(collection) !== true && typeof(collection) === 'object' && collection !== null && collection instanceof Date !== true) {
+        return 'object';
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -43,7 +52,7 @@ function arrayOrObject(collection) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeWord(string) {
-    
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -51,7 +60,13 @@ function capitalizeWord(string) {
 //////////////////////////////////////////////////////////////////////
 
 function capitalizeAllWords(string) {
-    
+    string = string.toLowerCase().split(' ');
+    for ( var i = 0; i < string.length; i++) {
+        string[i] = string[i].split('');
+        string[i][0] = string[i][0].toUpperCase(); 
+        string[i] = string[i].join('');
+    }
+    return string.join(' ');
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -59,7 +74,8 @@ function capitalizeAllWords(string) {
 //////////////////////////////////////////////////////////////////////
 
 function welcomeMessage(object) {
-
+    var name = object.name.charAt(0).toUpperCase() + object.name.slice(1);
+    return "Welcome " + name + "!";
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -67,7 +83,9 @@ function welcomeMessage(object) {
 //////////////////////////////////////////////////////////////////////
 
 function profileInfo(object) {
-
+    var name = object.name.charAt(0).toUpperCase() + object.name.slice(1);
+    var species = object.species.charAt(0).toUpperCase() + object.species.slice(1);
+    return name + " is a " + species;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -75,15 +93,42 @@ function profileInfo(object) {
 //////////////////////////////////////////////////////////////////////
 
 function maybeNoises(object) {
-
+    if (object.noises === undefined) {
+        return "there are no noises";
+    } else if (object.noises.length === 0) {
+        return "there are no noises";
+    } else {
+        return object.noises.join(' ');
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 10 - Has Words ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function hasWord(string, word) {
+/*
+IOCE: Input Output Constructs Edge-Cases
 
+Input:
+@param word [string] - single word
+@param string [string] - string of words
+
+Output:
+@return [boolean]
+
+Constructs:
+Edge-Cases:
+*/
+
+function hasWord(string, word) {
+//define a variable
+    var array = string.split(' ');
+    for (var i = 0; i < array.length; i++){
+        if (array[i] === word){
+            return true;
+        }
+    }
+    return false;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -91,7 +136,13 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
-
+    let friends = object.friends.indexOf(name);
+    if (friends === -1) {
+        object.friends.push(name);
+        return object;
+    } else {
+        return object;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -99,7 +150,16 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
-
+    if (object.friends) {
+        let friends = object.friends.indexOf(name);
+        if (friends === -1) {
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -107,7 +167,23 @@ function isFriend(name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-
+    var nonfriends = [];
+    
+    for (var i = 0; i < array.length; i++) { 
+        var friends = array[i].friends;
+        var isFriend = false;
+        if (array[i].name !== name) { 
+            for (var e = 0; e < friends.length; e++) { 
+                if (friends[e] === name) { 
+                    isFriend = true; 
+                }
+            }
+            if (!isFriend) {
+                nonfriends.push(array[i].name);
+            }
+        }
+    }
+    return nonfriends;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -115,7 +191,8 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+    object[key] = value;
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -123,7 +200,14 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+    if (array.length > 0) {
+        for (var x in object) {
+            for (var y = 0; y < array.length; y++) {
+                if (array[y] === x || array[y] == object[x]) delete object[x];
+    }
+        }
+            }
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -131,7 +215,10 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+    var unique = array.filter(function(elem, index, self) {
+        return index == self.indexOf(elem);
+    });
+    return unique;
 }
 
 //////////////////////////////////////////////////////////////////////
